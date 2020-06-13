@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Typing Test</title>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script> -->
+
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/reset.css">
+	<link rel="stylesheet" href="{% static 'HOME/style.css' %}">
+</head>
+<body id="body">
+
+	<!-- Side Navigation -->
+
+	<input type="checkbox" name="nav" id="nav_button">
+
+	<label for="nav_button" class="hamburger">
+		<div></div>
+		<div></div>
+		<div></div>
+	</label>
+
+
+	<div class="side_nav">
+		<div class="logo">
+			<label for="nav_button" class="off">&Cross;</label>
+			{% if user == False %}
+				<img src="/media/images/default.jpg" style="top:0" />
+				<p> Guest User </p>
+			{%else%}
+				<img id="userimage" src="{{ user.user_img.url }}" /> 
+				<p>{{user.user_name}}</p>
+      			{% csrf_token %}
+      			<form method="POST" name="form" id="form">
+					<input type='file' id="change_image" name='user_img' accept=".jpg,.png,.jpeg" hidden/>
+				</form>
+				<label for="change_image" id="mask"> <p>Change Your Photo </p> </label>
+
+
+			{%endif%}	
+		</div>
+		<div class="nav_link">
+			<a href="{% url 'home' %}"><li>Home</li></a>
+			<a href="#"><li>About Us</li></a>
+			<a href="{%url 'rank'%}"><li>Ranking</li></a>
+			{% if user != False %}
+				<a href="{%url 'progress'%}"><li>See Progress</li></a>
+				<a href="{% url 'logout' %}" ><li style="background: #ee4c4c; color: #fff">LogOut</li></a>
+			{%endif%}	
+		</div>
+	</div>
+
+
+
+	<div class="heading">
+		<div class="title font_cursive" >Test Your Typing</div>
+
+		{% if user == False %}
+				<div class="logIn">
+					<a id="signUp">SignUp </a>
+					<span style="padding: 9px 2px 9px 2px; background: #fff;"></span>
+					<a id="logIn">&nbsp; LogIn</a>
+				</div>
+		{%else%}
+				<div class="logIn">
+					<p>Welcome {{user.user_name}}</p>
+					<span><img src="{{user.user_img.url}}">
+				</span></div>
+		{%endif%}
+		
+
+	</div>
+
+
+
+
+
+{% block content %}{% endblock content %}
+
+
+
+
+
+{% if user == False %}
+<div class="signup-container" id="signup-form">
+  <div class="signup">
+  	<span id="cross1">&cross;</span>
+    <div class="signup__title">
+      <h2>Sign UP </h2>    </div>
+
+    <div class="signup__form">
+      <form class="form" action="{% url 'register' %}"  method="post">
+      	{% csrf_token %}
+      	<div class="form__email">
+          <label for="name">Enter Your User Name:</label>
+          <input type="text" id="name" name="user_name"/>
+        </div>
+        <div class="form__email">
+          <label for="email">Enter Your User Email:</label>
+          <input type="email" id="email" name="user_mail"/>
+        </div>
+        <div class="form__psw">
+          <label for="password">Enter Your Password:</label>
+          <input type="password" id="password" name="user_pass"/>
+        </div>
+        <div class="form__terms">
+          <p><a href="#">Forget Password?</a></p>
+        </div>
+        <div class="form__unlock">
+          <button type="submit"> <i class="fa fa-key"></i> LogIn</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="signup-container" id="login-form">
+  <div class="signup">
+  	<span id="cross1">&cross;</span>
+    <div class="signup__title">
+      <h2>Log In </h2>    </div>
+
+    <div class="signup__form">
+      <form class="form" action="{% url 'login' %}"  method="post">
+      	{% csrf_token %}
+        <div class="form__email">
+          <label for="email">Enter Your User Email:</label>
+          <input type="email" id="email" name="user_mail"/>
+        </div>
+        <div class="form__psw">
+          <label for="password">Enter Your Password:</label>
+          <input type="password" id="password" name="user_pass"/>
+        </div>
+        <div class="form__terms">
+          <p><a href="#">Forget Password?</a></p>
+        </div>
+        <div class="form__unlock">
+          <button type="submit"> <i class="fa fa-key"></i> LogIn</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{%endif%}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript" charset="utf-8" async defer></script>
+
+<script src="{% static 'HOME/script.js' %}">
+</script>
+
+</body>
+</html>

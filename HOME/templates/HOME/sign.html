@@ -1,0 +1,13 @@
+{% block content %}
+<form method="Post">
+	{% csrf_token %}
+	{{form.as_p}}
+	<button type="submit">Save</button>
+</form>
+
+<form method="Post">
+	{% csrf_token %}
+	{{lform.as_p}}
+	<button type="submit">Save</button>
+</form>
+{% endblock %}	

@@ -1,0 +1,29 @@
+{% extends "HOME/base.html" %}
+
+{% block content %}
+<div class="rankes">
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Best WPM</th>
+          <th>Time</th>
+        </tr>
+      <thead>
+      <tbody>
+      	{% for user in rank %}
+			<tr>
+				<td>{{forloop.counter}}</td>
+				<td>{{user.user_name}}</td>
+				<td>{{user.user_best_score}}</td>
+				<td>{{user.user_best_time}} Min</td>
+			</tr>
+		{% endfor %}
+      </tbody>
+    <table/>
+</div>
+{% endblock content %}
+
+
+  

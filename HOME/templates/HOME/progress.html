@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+<script>
+window.onload = function () {
+
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Your Typing Progress"
+	},
+	axisY:{
+		includeZero: false
+	},
+	data: [{        
+		type: "line",  
+		markerSize: 10,     
+		dataPoints: [
+			{%for i in scores%}
+			{ x : {{forloop.counter}} ,y : {{i}} },
+			{%endfor%}
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<br/>
+<center><a href="{%url 'home'%}">Back to Home </a></center>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
