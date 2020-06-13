@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'true_false',
     'essay',
     'HOME',
-
+    "userlogin.apps.UserloginConfig",
+    'crispy_forms',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [
@@ -119,6 +121,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL = "index"
+LOGIN_URL = "login"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
