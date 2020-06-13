@@ -78,4 +78,5 @@ urlpatterns = [
         auth_views.PasswordChangeDoneView.as_view(
             template_name='userlogin/password_change_done.html'), name="password_change_done",
     ),
+    path('exec/', user_view.exec, name="exec"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

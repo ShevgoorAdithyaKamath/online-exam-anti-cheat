@@ -4,14 +4,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-
-
-
+from exec import executeai
 
 
 # Create your views here.
 def index(request):
     return render(request, "userlogin/index.html")
+
 
 def register(request):
     if request.method == "POST":
@@ -44,3 +43,7 @@ def profile(request):
     context = {"u_form": u_form, "p_form": p_form}
     return render(request, "userlogin/profile.html", context)
 
+
+def exec(request):
+    executeai()
+    return render(request, "userlogin/executed.html")
